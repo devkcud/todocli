@@ -1,12 +1,7 @@
-extern crate dirs;
-extern crate yaml_rust;
-extern crate term_grid;
-extern crate colored;
-
 use std::{path::Path, fs::{self, File}, io::Read};
 
 use dirs::config_dir;
-use yaml_rust::{YamlLoader};
+use yaml_rust::YamlLoader;
 use term_grid::{GridOptions, Grid, Direction, Cell};
 use colored::Colorize;
 
