@@ -29,7 +29,7 @@ fn load_configuration(config: &mut json::JsonValue) {
     *config = json::parse(&read_to_string(config_file).unwrap()).unwrap();
 }
 
-fn todos_to_vec(config: json::JsonValue) -> Vec<String> {
+fn todo_to_vec(config: json::JsonValue) -> Vec<String> {
     let mut list: Vec<String> = vec![];
     let mut todos = config["todos"].clone();
 
@@ -45,7 +45,7 @@ fn show_todo_list(config: json::JsonValue) {
         filling: term_grid::Filling::Spaces(1),
     });
 
-    let todos = todos_to_vec(config);
+    let todos = todo_to_vec(config);
 
     for (i, todo) in todos.iter().enumerate() {
         grid.add(Cell::from(i.to_string().yellow().to_string()));
