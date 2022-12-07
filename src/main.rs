@@ -1,4 +1,4 @@
-use std::{path::Path, fs::{self, File}, io::Read};
+use std::{path::Path, fs::{self, File}, io::Read, process::exit};
 
 use dirs::config_dir;
 use yaml_rust::YamlLoader;
@@ -21,8 +21,16 @@ fn main() {
 
     let config = &YamlLoader::load_from_str(&file_data).unwrap();
 
-    if config.len() == 0 { return; }
+    if config.len() == 0 {
+        println!("The configuration file is empty.");
+        exit(1);
+    }
     let config = &config[0];
+
+    if config["todos"].is_badvalue() == true {
+        println!("The configuration file's to-do list section is missing.");
+        exit(1);
+    }
 
     let mut output_grid = Grid::new(GridOptions { direction: Direction::LeftToRight, filling: term_grid::Filling::Spaces(1) });
 
