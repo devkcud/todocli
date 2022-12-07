@@ -1,4 +1,4 @@
-use std::{path::Path, fs::{self, File}, io::Read, process::exit};
+use std::{path::Path, fs, process::exit};
 
 use dirs::config_dir;
 use yaml_rust::{YamlLoader, Yaml};
@@ -6,29 +6,8 @@ use term_grid::{GridOptions, Grid, Direction, Cell};
 use colored::Colorize;
 
 fn main() {
-    // Getting the config file/folder
-    let config_dir = config_dir().unwrap();
-    let config_dir = config_dir.to_str().unwrap();
-
-    let config_dir = format!("{}/todocli", config_dir.replace("\\", "/"));
-    let config_file = format!("{}/config.yml", config_dir);
-
-    if Path::new(&config_dir).is_dir()   == false { fs::create_dir_all(&config_dir).expect("Error creating config folder."); }
-    if Path::new(&config_file).is_file() == false { fs::write(&config_file, "todos: []").expect("Error creating config file."); }
-
-    // Getting file data
-    let mut file_data = String::new();
-    File::open(config_file).unwrap().read_to_string(&mut file_data).expect("Error reading config file.");
-
-    // Loading YAML configuration
-    let config = &YamlLoader::load_from_str(&file_data).unwrap();
-
-    // If config is empty show an error
-    if config.len() == 0 {
-        println!("The configuration file is empty.");
-        exit(1);
-    }
-
+    let mut config: Vec<Yaml> = vec![];
+    load_configuration(&mut config);
     let config = &config[0];
 
     // Check if config `todos` exists
@@ -37,7 +16,19 @@ fn main() {
         exit(1);
     }
 
-    show_todo_list(config);
+    show_todo_list(&config);
+}
+
+fn load_configuration(config: &mut Vec<Yaml>) {
+    // Getting the config file/folder
+    let config_dir = format!("{}/todocli", config_dir().unwrap().to_str().unwrap().replace("\\", "/"));
+    let config_file = format!("{}/config.yml", config_dir);
+
+    if Path::new(&config_dir).is_dir()   == false { fs::create_dir(&config_dir).expect("Error creating config folder."); }
+    if Path::new(&config_file).is_file() == false { fs::write(&config_file, "todos: []").expect("Error creating config file."); }
+
+    // It's loading the configuration file into the `config` variable.
+    *config = YamlLoader::load_from_str(&fs::read_to_string(config_file).unwrap()).unwrap();
 }
 
 fn show_todo_list(config: &Yaml) {
