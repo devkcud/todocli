@@ -15,6 +15,9 @@ pub fn show_todo_list(config: json::JsonValue) {
 
     let todos = todo_to_vec(config);
 
+    grid.add(Cell::from("Index".yellow().bold().to_string()));
+    grid.add(Cell::from("Todo".blue().bold().to_string()));
+
     for (i, todo) in todos.iter().enumerate() {
         grid.add(Cell::from(i.to_string().yellow().to_string()));
         grid.add(Cell::from(todo.to_string().blue().to_string()));

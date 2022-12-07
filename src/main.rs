@@ -31,6 +31,11 @@ fn main() {
         "l" | "list" => show_todo_list(config),
         "r" | "remove" => remove_todo(config, args.get(0).expect("No index passed")),
         "R" | "reset" => reset_todo_tree(),
+        "h" | "help" =>
+            println!(
+                "Available commands: {}\n\te.g.: todocli add Do some stuff no cap",
+                vec!["add <What to do>", "remove <Index>", "reset", "list"].join(", ")
+            ),
         _ => exit(1),
     }
 }
