@@ -8,7 +8,8 @@ pub fn load_configuration(config: &mut json::JsonValue) {
     let config_file = format!("{}/config.json", config_dir);
 
     (!Path::new(&config_dir).is_dir()).then(|| create_dir(&config_dir));
-    (Path::new(&config_file).is_file() == false).then(|| write(&config_file, "{ \"todos\": [] }"));
+    (!Path::new(&config_file).is_file()).then(|| write(&config_file, "{ \"todos\": [] }"));
+
     // It's loading the configuration file into the `config` variable.
     *config = json::parse(&read_to_string(config_file).unwrap()).unwrap();
 }

@@ -1,5 +1,5 @@
 mod utils;
-use utils::{ functions::{ load_configuration }, manage_todos::show_todo_list };
+use utils::{ functions::load_configuration, manage_todos::show_todo_list };
 
 use std::process::exit;
 use json;
