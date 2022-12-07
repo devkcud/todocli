@@ -6,3 +6,7 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+colored = "2.0.0"
+dirs = "4.0.0"
+json = "0.12.4"
+term_grid = "0.2.0"
