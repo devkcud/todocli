@@ -7,12 +7,12 @@ pub struct Configuration {
 }
 
 impl Configuration {
-    pub fn get_file(&self) -> &str {
-        &self.file_path
+    pub fn get_folder_path(&self) -> &str {
+        &self.folder_path
     }
 
-    pub fn get_folder(&self) -> &str {
-        &self.folder_path
+    pub fn get_file_path(&self) -> &str {
+        &self.file_path
     }
 }
 
