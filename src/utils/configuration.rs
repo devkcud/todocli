@@ -2,15 +2,10 @@ use dirs::config_dir;
 use std::fs;
 
 pub struct Configuration {
-    folder_path: String,
     file_path: String,
 }
 
 impl Configuration {
-    pub fn get_folder_path(&self) -> &str {
-        &self.folder_path
-    }
-
     pub fn get_file_path(&self) -> &str {
         &self.file_path
     }
@@ -26,5 +21,5 @@ pub fn load_configuration(folder_name: &str) -> Configuration {
         Err(_e) => fs::write(&config_file, "").expect("Could not create configuration directory."),
     }
 
-    Configuration { folder_path: config_dir, file_path: config_file }
+    Configuration { file_path: config_file }
 }
