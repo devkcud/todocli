@@ -16,8 +16,8 @@ impl Configuration {
     }
 }
 
-pub fn load_configuration() -> Configuration {
-    let config_dir = format!("{}/todocli", config_dir().unwrap().to_str().unwrap());
+pub fn load_configuration(folder_name: &str) -> Configuration {
+    let config_dir = format!("{}/{}", config_dir().unwrap().to_str().unwrap(), folder_name);
     fs::create_dir_all(&config_dir).expect("Could not create configuration directory.");
 
     let config_file = format!("{}/config.yml", config_dir);
