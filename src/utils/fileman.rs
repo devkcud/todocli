@@ -8,7 +8,7 @@ pub fn load_yaml(config: &Configuration) -> Vec<Yaml> {
     let config_content = fs::read_to_string(config.get_file_path()).unwrap();
     let yaml = YamlLoader::load_from_str(&config_content);
 
-    yaml.expect("Could not load config file")
+    return yaml.expect("Could not load config file");
 }
 
 pub fn get_todos(config: &Configuration) -> Result<Array, &str> {

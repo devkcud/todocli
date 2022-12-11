@@ -7,7 +7,7 @@ pub struct Configuration {
 
 impl Configuration {
     pub fn get_file_path(&self) -> &str {
-        &self.file_path
+        return &self.file_path;
     }
 }
 
@@ -21,5 +21,5 @@ pub fn load_configuration(folder_name: &str) -> Configuration {
         Err(_e) => fs::write(&config_file, "").expect("Could not create configuration directory."),
     }
 
-    Configuration { file_path: config_file }
+    return Configuration { file_path: config_file };
 }
