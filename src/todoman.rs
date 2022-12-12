@@ -1,7 +1,10 @@
+use std::fs;
+
 use crate::utils::{ configuration::Configuration, fileman::get_todos };
 
 use colored::Colorize;
 use prettytable::{ Table, format, row };
+use yaml_rust::YamlLoader;
 
 pub fn show_todo_list(config: &Configuration) {
     let mut table = Table::new();
@@ -28,4 +31,24 @@ pub fn show_todo_list(config: &Configuration) {
     table.add_row(row!["Size:".dimmed(), &todos.len().to_string().yellow()]);
 
     println!("{}", table.to_string().trim());
+}
+
+pub fn add_item(config: &Configuration, name: &str, done: bool) {
+    let mut todos = get_todos(&config).expect("got");
+    let new_todo_string = format!("{{ name: \"{}\", done: {done} }}", name.replace("\"", ""));
+
+    todos.push(YamlLoader::load_from_str(&new_todo_string).unwrap()[0].clone());
+
+    let mut out_str = "# Generated automatically don't manually change it.\ntodos: [".to_string();
+
+    for todo in todos {
+        let r_name = todo["name"].as_str().unwrap();
+        let r_done = todo["done"].as_bool().unwrap();
+
+        let f = format!("{}{{name: \"{}\",done: {}}},", out_str, r_name, r_done);
+        out_str = f;
+    }
+
+    out_str = out_str + " ]";
+    fs::write(config.get_file_path(), &out_str).expect("Failed to add the new todo to the list");
 }
