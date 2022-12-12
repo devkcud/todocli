@@ -1,12 +1,11 @@
 mod utils;
-use utils::configuration::load_configuration;
+mod todoman;
 
-use crate::utils::fileman::get_todos;
+use crate::utils::configuration::load_configuration;
+use crate::todoman::show_todo_list;
 
 fn main() {
     let config = load_configuration("todocli");
 
-    for todo in get_todos(&config).expect("got") {
-        println!("{}", todo.as_str().unwrap());
-    }
+    show_todo_list(&config);
 }

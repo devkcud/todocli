@@ -8,4 +8,5 @@ edition = "2021"
 [dependencies]
 colored = "2.0.0"
 dirs = "4.0.0"
+prettytable-rs = "0.9.0"
 yaml-rust = "0.4.5"
