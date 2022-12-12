@@ -1,5 +1,5 @@
 use dirs::config_dir;
-use std::fs;
+use std::fs::{ create_dir_all, metadata, write };
 
 pub struct Configuration {
     file_path: String,
@@ -13,12 +13,16 @@ impl Configuration {
 
 pub fn load_configuration(folder_name: &str) -> Configuration {
     let config_dir = format!("{}/{}", config_dir().unwrap().to_str().unwrap(), folder_name);
-    fs::create_dir_all(&config_dir).expect("Could not create configuration directory.");
+    create_dir_all(&config_dir).expect("Could not create configuration directory.");
 
     let config_file = format!("{}/config.yml", config_dir);
-    match fs::metadata(&config_file) {
+    match metadata(&config_file) {
         Ok(_o) => (),
-        Err(_e) => fs::write(&config_file, "").expect("Could not create configuration directory."),
+        Err(_e) =>
+            write(
+                &config_file,
+                "# Generated automatically don't manually change it.\ntodos: []"
+            ).expect("Could not create configuration directory."),
     }
 
     return Configuration { file_path: config_file };
