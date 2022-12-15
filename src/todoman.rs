@@ -80,3 +80,20 @@ pub fn remove_item(config: &Configuration, index: usize) {
 pub fn remove_all(config: &Configuration) {
     fs::write(config.get_file_path(), "todos: []").expect("Failed to write to file")
 }
+
+pub fn toggle_done(config: &Configuration, index: usize) {
+    let todos = get_todos(&config).expect("got");
+
+    if todos.len() == 0 {
+        println!("Todo list is empty.");
+        exit(1);
+    }
+
+    let todo = todos.get(index.wrapping_sub(1).clamp(0, todos.len() - 1)).unwrap();
+
+    let todo_name = todo["name"].as_str().unwrap();
+    let todo_done = !todo["done"].as_bool().unwrap();
+
+    remove_item(&config, index);
+    add_item(&config, todo_name, todo_done);
+}
