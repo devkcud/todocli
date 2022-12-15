@@ -19,11 +19,9 @@ pub fn show_todo_list(config: &Configuration) {
         let name = todo["name"].as_str().unwrap();
         let mut done = todo["done"].as_bool().unwrap().to_string();
 
-        if done == "true" {
-            done = done.green().to_string();
-        } else {
-            done = done.red().to_string();
-        }
+        done = (done == "true")
+            .then(|| done.green().to_string())
+            .unwrap_or_else(|| done.red().to_string());
 
         table.add_row(row![index, name, done]);
     }
@@ -51,4 +49,8 @@ pub fn add_item(config: &Configuration, name: &str, done: bool) {
 
     out_str = out_str + " ]";
     fs::write(config.get_file_path(), &out_str).expect("Failed to add the new todo to the list");
+}
+
+pub fn remove_all(config: &Configuration) {
+    fs::write(config.get_file_path(), "todos: []").expect("Failed to write to file")
 }
