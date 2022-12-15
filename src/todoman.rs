@@ -1,4 +1,4 @@
-use std::fs;
+use std::{ fs, process::exit };
 
 use crate::utils::{ configuration::Configuration, fileman::get_todos };
 
@@ -47,7 +47,33 @@ pub fn add_item(config: &Configuration, name: &str, done: bool) {
         out_str = f;
     }
 
-    out_str = out_str + " ]";
+    out_str = out_str + "]";
+    fs::write(config.get_file_path(), &out_str).expect("Failed to add the new todo to the list");
+}
+
+pub fn remove_item(config: &Configuration, index: usize) {
+    let mut todos = get_todos(&config).expect("got");
+
+    if todos.len() == 0 {
+        println!("Todo list is empty.");
+        exit(1);
+    }
+
+    let index = index.wrapping_sub(1).clamp(0, todos.len() - 1);
+
+    todos.remove(index);
+
+    let mut out_str = "# Generated automatically don't manually change it.\ntodos: [".to_string();
+
+    for todo in todos {
+        let r_name = todo["name"].as_str().unwrap();
+        let r_done = todo["done"].as_bool().unwrap();
+
+        let f = format!("{}{{name: \"{}\",done: {}}},", out_str, r_name, r_done);
+        out_str = f;
+    }
+
+    out_str = out_str + "]";
     fs::write(config.get_file_path(), &out_str).expect("Failed to add the new todo to the list");
 }
 
