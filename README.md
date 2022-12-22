@@ -18,7 +18,7 @@ A todo list from terminal. Compatible with Linux and Windows, not tested on macO
 To build, follow these steps:
 
 1. Clone the repository using `git clone https://github.com/devkcud/todocli.git`
-2. cd into the _cloned folder_ and build it using `cargo build --release --quiet`
+2. cd into the _cloned folder_ and build it using `cargo build --release`
 
 ## Usage
 
