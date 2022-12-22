@@ -49,6 +49,6 @@ Assuming you've built it and you're on the _cloned folder_, run:
 
 - ~~Rewrite source;~~
 - Create a temporary todo (available only on current session);
-- STOP USING JSON (causing most of the problems);
+- ~~STOP USING JSON (causing most of the problems);~~
 - Create an update todo command;
 - Add an insert mode.
