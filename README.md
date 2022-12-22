@@ -6,8 +6,7 @@ A todo list from terminal. Compatible with Linux and Windows, not tested on macO
 
 ## Features
 
-- Create/Read/Delete todos;
-- Completely reset todos.
+- Create/Read/Delete/Clear todos;
 
 ## Requirements
 
@@ -42,8 +41,7 @@ Assuming you've built it and you're on the _cloned folder_, run:
 
 ## Known issues
 
-1. When trying to remove a negative number;
-2. When trying to remove an string instead of a number.
+-
 
 ## To do
 
