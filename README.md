@@ -24,8 +24,10 @@ To build, follow these steps:
 Assuming you've built it and you're on the _cloned folder_, run:
 
 ```bash
-./target/release/todocli <...arguments>
+./target/release/todocli[EXE] [COMMAND]
 ```
+
+> You can go to the release folder and run copy the executable to anywhere you want.
 
 ### Commands
 
