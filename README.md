@@ -2,7 +2,7 @@
 
 A todo list from terminal. Compatible with Linux and Windows, not tested on macOS (not planing on support tho).
 
-**Note:** _Currently being rewritten in a different branch due to problematic and spaghetti code_ :)
+~~**Note:** _Currently being rewritten in a different branch due to problematic and spaghetti code_ :)~~
 
 ## Features
 
