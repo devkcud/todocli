@@ -30,13 +30,15 @@ Assuming you've built it and you're on the _cloned folder_, run:
 
 ### Commands
 
-| Command | Aliases | Description                                | (Semi-)Example                   | Example                                   | Deprecated
-|      -: | :-      | :-                                         | :-                               | :-                                        |    :-:
-|     add | a       | Add a todo.                                | todocli add [name: _String_]     | todocli **add** _Here it goes... My todo_ |    ❌
-|  remove | r       | Remove a todo. (see each index on list)    | todocli remove [index: _Number_] | todocli **remove** _5_                    |    ❌
-|   reset | R       | Reset todos.                               | todocli reset                    | todo **reset**                            |    ❌
-|    list | l       | Show todo list.                            | todocli                          | todocli                                   |    ✅
-|    help | h       | Show help menu.                            | todocli help                     | todocli help                              |    ❌
+| Command | Description                                | (Semi-)Example                   | Example
+|      -: | :-                                         | :-                               | :-
+|     add | Add a todo.                                | todocli add [name: _String_]     | todocli **add** "_Here it goes... My todo_"
+|  remove | Remove a todo. (see each index on list)    | todocli remove [index: _Number_] | todocli **remove** _5_
+|  toggle | Toggle 'done' status.                      | todocli toggle [index: _Number_] | todocli **toggle** _2_
+|   reset | Reset todos.                               | todocli clear                    | todo **clear**
+|    help | Show help menu.                            | todocli help                     | todocli help
+
+> If you don't pass any command in the CLI, it will show the to-do list with each index and size
 
 ## Known issues
 
@@ -45,7 +47,7 @@ Assuming you've built it and you're on the _cloned folder_, run:
 
 ## To do
 
-- Rewrite source;
+- ~~Rewrite source;~~
 - Create a temporary todo (available only on current session);
 - STOP USING JSON (causing most of the problems);
 - Create an update todo command;
