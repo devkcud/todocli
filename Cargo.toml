@@ -9,5 +9,5 @@ edition = "2021"
 clap = { version = "4.0.30", features = ["derive"] }
 colored = "2.0.0"
 dirs = "4.0.0"
-prettytable-rs = "0.9.0"
+prettytable-rs = "0.10.0"
 yaml-rust = "0.4.5"
